@@ -97,6 +97,12 @@ function ImageControls() {
       <ImagePatternControls />
       <div className="h-px bg-border" />
       <ToneMappingControls />
+      {imageConfig.advancedMode && (
+        <>
+          <div className="h-px bg-border" />
+          <ImageWaveControls />
+        </>
+      )}
       <div className="h-px bg-border" />
       <ImageCanvasControls />
       <div className="h-px bg-border" />
