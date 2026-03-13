@@ -6,7 +6,15 @@ export type HalftoneVariant =
   | "noise-scatter"
   | "wave-dashes";
 
-export type WaveType = "sine" | "cosine" | "triangle" | "noise";
+export type WaveType = "sine" | "triangle" | "noise";
+
+export interface WaveConfig {
+  enabled: boolean;
+  type: WaveType;
+  amplitude: number;   // 0-1
+  frequency: number;   // 0.1-8
+  phaseOffset: number;  // 0-1 (maps to 0..2π internally)
+}
 
 export type SizePreset = "square" | "portrait" | "landscape" | "story" | "poster" | "custom";
 
