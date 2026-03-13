@@ -16,6 +16,7 @@ import { ImageCanvasControls } from "./ImageCanvasControls";
 import { ImageColorControls } from "./ImageColorControls";
 import { ToneMappingControls } from "./ToneMappingControls";
 import { ImagePreviewControls } from "./ImagePreviewControls";
+import { ImageWaveControls } from "./ImageWaveControls";
 import { cn } from "@/lib/utils";
 
 export function ControlPanel() {
