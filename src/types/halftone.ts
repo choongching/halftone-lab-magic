@@ -6,7 +6,15 @@ export type HalftoneVariant =
   | "noise-scatter"
   | "wave-dashes";
 
-export type WaveType = "sine" | "cosine" | "triangle" | "noise";
+export type WaveType = "sine" | "triangle" | "noise";
+
+export interface WaveConfig {
+  enabled: boolean;
+  type: WaveType;
+  amplitude: number;   // 0-1
+  frequency: number;   // 0.1-8
+  phaseOffset: number;  // 0-1 (maps to 0..2π internally)
+}
 
 export type SizePreset = "square" | "portrait" | "landscape" | "story" | "poster" | "custom";
 
@@ -30,10 +38,7 @@ export interface HalftoneConfig {
   sizeRange: number;     // 0-1
   spacing: number;       // 0-1
   rotation: number;      // 0-360
-  waveType: WaveType;
-  amplitude: number;     // 0-1
-  frequency: number;     // 0-1
-  phaseOffset: number;   // 0-1
+  wave: WaveConfig;
   seed: number;          // integer
   showFrame: boolean;
   frameRadius: number;   // 0-50
@@ -52,6 +57,7 @@ export interface ImageConfig {
   threshold: number;     // 0-1
   invert: boolean;
   gamma: number;         // 0.2 to 5
+  wave: WaveConfig;
   density: number;       // 0-1
   sizeRange: number;     // 0-1
   spacing: number;       // 0-1
@@ -94,9 +100,16 @@ export const IMAGE_PATTERN_LABELS: Record<ImagePatternType, string> = {
 
 export const WAVE_TYPE_LABELS: Record<WaveType, string> = {
   sine: "Sine",
-  cosine: "Cosine",
   triangle: "Triangle",
   noise: "Noise",
+};
+
+export const DEFAULT_WAVE_CONFIG: WaveConfig = {
+  enabled: false,
+  type: "sine",
+  amplitude: 0.25,
+  frequency: 1.0,
+  phaseOffset: 0,
 };
 
 export const SIZE_PRESET_DIMENSIONS: Record<Exclude<SizePreset, 'custom'>, { width: number; height: number }> = {

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { HalftoneConfig, ImageConfig, SavedPreset, SizePreset, CreationMode } from "@/types/halftone";
-import { SIZE_PRESET_DIMENSIONS } from "@/types/halftone";
+import { SIZE_PRESET_DIMENSIONS, DEFAULT_WAVE_CONFIG } from "@/types/halftone";
 
 export const DEFAULT_CONFIG: HalftoneConfig = {
   variant: "helio-circles",
@@ -16,10 +16,7 @@ export const DEFAULT_CONFIG: HalftoneConfig = {
   sizeRange: 0.4,
   spacing: 0.45,
   rotation: 0,
-  waveType: "sine",
-  amplitude: 0.35,
-  frequency: 0.5,
-  phaseOffset: 0.15,
+  wave: { ...DEFAULT_WAVE_CONFIG },
   seed: 42,
   showFrame: false,
   frameRadius: 12,
@@ -38,6 +35,7 @@ export const DEFAULT_IMAGE_CONFIG: ImageConfig = {
   threshold: 0.1,
   invert: false,
   gamma: 1,
+  wave: { ...DEFAULT_WAVE_CONFIG },
   density: 0.5,
   sizeRange: 0.5,
   spacing: 0.45,
@@ -103,7 +101,6 @@ export const useHalftoneStore = create<HalftoneStore>((set, get) => ({
     set((state) => ({
       imageConfig: {
         ...DEFAULT_IMAGE_CONFIG,
-        // Keep the uploaded image
         sourceImageUrl: state.imageConfig.sourceImageUrl,
         sourceImageWidth: state.imageConfig.sourceImageWidth,
         sourceImageHeight: state.imageConfig.sourceImageHeight,
@@ -112,12 +109,12 @@ export const useHalftoneStore = create<HalftoneStore>((set, get) => ({
 
   randomize: () => {
     const { mode } = get();
+    const waveTypes = ["sine", "triangle", "noise"] as const;
+    const fgColors = ["#e8e4dc", "#ffffff", "#f5c542", "#ff6b6b", "#4ecdc4", "#a8e6cf", "#ff8a5c", "#d4a5ff"];
+    const bgColors = ["#1a1a2e", "#0d1117", "#16213e", "#1b1b2f", "#2d132c", "#0a192f", "#121212", "#1e1e1e"];
+
     if (mode === "procedural") {
       const variants = ["dot-grid", "square-grid", "triangle-grid", "helio-circles", "noise-scatter", "wave-dashes"] as const;
-      const waveTypes = ["sine", "cosine", "triangle", "noise"] as const;
-      const fgColors = ["#e8e4dc", "#ffffff", "#f5c542", "#ff6b6b", "#4ecdc4", "#a8e6cf", "#ff8a5c", "#d4a5ff"];
-      const bgColors = ["#1a1a2e", "#0d1117", "#16213e", "#1b1b2f", "#2d132c", "#0a192f", "#121212", "#1e1e1e"];
-
       set((state) => ({
         config: {
           ...state.config,
@@ -126,10 +123,13 @@ export const useHalftoneStore = create<HalftoneStore>((set, get) => ({
           sizeRange: randomBetween(0.2, 0.7),
           spacing: randomBetween(0.25, 0.65),
           rotation: Math.floor(randomBetween(0, 360)),
-          waveType: waveTypes[Math.floor(Math.random() * waveTypes.length)],
-          amplitude: randomBetween(0.15, 0.6),
-          frequency: randomBetween(0.25, 0.75),
-          phaseOffset: randomBetween(0, 0.5),
+          wave: {
+            enabled: Math.random() > 0.3,
+            type: waveTypes[Math.floor(Math.random() * waveTypes.length)],
+            amplitude: randomBetween(0.15, 0.6),
+            frequency: randomBetween(0.5, 4),
+            phaseOffset: randomBetween(0, 0.5),
+          },
           seed: Math.floor(Math.random() * 10000),
           foregroundColor: fgColors[Math.floor(Math.random() * fgColors.length)],
           backgroundColor: bgColors[Math.floor(Math.random() * bgColors.length)],
@@ -137,9 +137,6 @@ export const useHalftoneStore = create<HalftoneStore>((set, get) => ({
       }));
     } else {
       const patterns = ["dot-grid", "square-grid", "triangle-grid"] as const;
-      const fgColors = ["#e8e4dc", "#ffffff", "#f5c542", "#ff6b6b", "#4ecdc4", "#a8e6cf", "#ff8a5c", "#d4a5ff"];
-      const bgColors = ["#1a1a2e", "#0d1117", "#16213e", "#1b1b2f", "#2d132c", "#0a192f", "#121212", "#1e1e1e"];
-
       set((state) => ({
         imageConfig: {
           ...state.imageConfig,
@@ -150,6 +147,13 @@ export const useHalftoneStore = create<HalftoneStore>((set, get) => ({
           brightness: randomBetween(-0.3, 0.3),
           contrast: randomBetween(-0.2, 0.5),
           threshold: randomBetween(0.05, 0.3),
+          wave: {
+            enabled: Math.random() > 0.5,
+            type: waveTypes[Math.floor(Math.random() * waveTypes.length)],
+            amplitude: randomBetween(0.1, 0.4),
+            frequency: randomBetween(0.5, 3),
+            phaseOffset: randomBetween(0, 0.5),
+          },
           foregroundColor: fgColors[Math.floor(Math.random() * fgColors.length)],
           backgroundColor: bgColors[Math.floor(Math.random() * bgColors.length)],
         },

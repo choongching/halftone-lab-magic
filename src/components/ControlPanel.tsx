@@ -16,6 +16,7 @@ import { ImageCanvasControls } from "./ImageCanvasControls";
 import { ImageColorControls } from "./ImageColorControls";
 import { ToneMappingControls } from "./ToneMappingControls";
 import { ImagePreviewControls } from "./ImagePreviewControls";
+import { ImageWaveControls } from "./ImageWaveControls";
 import { cn } from "@/lib/utils";
 
 export function ControlPanel() {
@@ -97,6 +98,12 @@ function ImageControls() {
       <ImagePatternControls />
       <div className="h-px bg-border" />
       <ToneMappingControls />
+      {imageConfig.advancedMode && (
+        <>
+          <div className="h-px bg-border" />
+          <ImageWaveControls />
+        </>
+      )}
       <div className="h-px bg-border" />
       <ImageCanvasControls />
       <div className="h-px bg-border" />

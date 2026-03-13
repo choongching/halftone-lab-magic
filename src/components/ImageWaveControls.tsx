@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 
 const WAVE_TYPES: WaveType[] = ["sine", "triangle", "noise"];
 
-export function BehaviorControls() {
-  const { config, setConfig } = useHalftoneStore();
+export function ImageWaveControls() {
+  const { imageConfig, setImageConfig } = useHalftoneStore();
 
-  if (!config.advancedMode) return null;
+  if (!imageConfig.advancedMode) return null;
 
-  const wave = config.wave;
+  const wave = imageConfig.wave;
   const setWave = (partial: Partial<typeof wave>) =>
-    setConfig({ wave: { ...wave, ...partial } });
+    setImageConfig({ wave: { ...wave, ...partial } });
 
   return (
     <ControlSection title="Wave Field">
@@ -56,15 +56,6 @@ export function BehaviorControls() {
           <SliderRow label="Phase Offset" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
         </>
       )}
-      <SliderRow
-        label="Seed"
-        value={config.seed}
-        min={0}
-        max={9999}
-        step={1}
-        onChange={(v) => setConfig({ seed: v })}
-        displayValue={String(config.seed)}
-      />
     </ControlSection>
   );
 }

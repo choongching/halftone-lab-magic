@@ -1,6 +1,7 @@
 import type { ImageConfig } from "@/types/halftone";
 import type { LuminanceMap } from "./imageSampler";
 import { sampleLuminance } from "./imageSampler";
+import { getWaveModifier } from "./waveHelper";
 
 interface SvgElement {
   type: "circle" | "rect" | "polygon";
@@ -11,6 +12,19 @@ function getGridStep(config: ImageConfig): number {
   const baseStep = 8 + (1 - config.density) * 40;
   const spacingFactor = 0.5 + config.spacing * 1.5;
   return baseStep * spacingFactor;
+}
+
+function applyWave(config: ImageConfig, x: number, y: number, baseSize: number): number {
+  if (!config.wave.enabled) return baseSize;
+  const modifier = getWaveModifier({
+    x, y,
+    width: config.width,
+    height: config.height,
+    wave: config.wave,
+  });
+  // Softer modulation in image mode to preserve subject recognizability
+  const softModifier = 1 - (1 - modifier) * 0.7;
+  return Math.max(0, baseSize * softModifier);
 }
 
 export function renderImageDotGrid(config: ImageConfig, lumaMap: LuminanceMap): SvgElement[] {
@@ -31,9 +45,8 @@ export function renderImageDotGrid(config: ImageConfig, lumaMap: LuminanceMap): 
       if (rx < pad || rx > config.width - pad || ry < pad || ry > config.height - pad) continue;
 
       const lum = sampleLuminance(lumaMap, x, y);
-      // Dark pixels = large dots (lum 0 = darkest)
       const darkness = 1 - lum;
-      const r = darkness * maxSize;
+      const r = applyWave(config, x, y, darkness * maxSize);
 
       if (r > 0.3) {
         elements.push({
@@ -65,7 +78,7 @@ export function renderImageSquareGrid(config: ImageConfig, lumaMap: LuminanceMap
 
       const lum = sampleLuminance(lumaMap, x, y);
       const darkness = 1 - lum;
-      const s = darkness * maxSize * 1.8;
+      const s = applyWave(config, x, y, darkness * maxSize * 1.8);
 
       if (s > 0.5) {
         elements.push({
@@ -104,7 +117,7 @@ export function renderImageTriangleGrid(config: ImageConfig, lumaMap: LuminanceM
 
       const lum = sampleLuminance(lumaMap, x, y);
       const darkness = 1 - lum;
-      const s = darkness * maxSize * 2;
+      const s = applyWave(config, x, y, darkness * maxSize * 2);
 
       if (s > 0.5) {
         const flip = (row + Math.floor(x / step)) % 2 === 0 ? 1 : -1;
