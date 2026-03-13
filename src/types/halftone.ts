@@ -38,10 +38,7 @@ export interface HalftoneConfig {
   sizeRange: number;     // 0-1
   spacing: number;       // 0-1
   rotation: number;      // 0-360
-  waveType: WaveType;
-  amplitude: number;     // 0-1
-  frequency: number;     // 0-1
-  phaseOffset: number;   // 0-1
+  wave: WaveConfig;
   seed: number;          // integer
   showFrame: boolean;
   frameRadius: number;   // 0-50
