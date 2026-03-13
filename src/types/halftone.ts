@@ -10,6 +10,12 @@ export type WaveType = "sine" | "cosine" | "triangle" | "noise";
 
 export type SizePreset = "square" | "portrait" | "landscape" | "story" | "poster" | "custom";
 
+export type CreationMode = "procedural" | "image";
+
+export type ImagePatternType = "dot-grid" | "square-grid" | "triangle-grid";
+
+export type ImageFitMode = "contain" | "cover";
+
 export interface HalftoneConfig {
   variant: HalftoneVariant;
   width: number;
@@ -35,6 +41,35 @@ export interface HalftoneConfig {
   advancedMode: boolean;
 }
 
+export interface ImageConfig {
+  sourceImageUrl: string | null;
+  sourceImageWidth: number;
+  sourceImageHeight: number;
+  fitMode: ImageFitMode;
+  patternType: ImagePatternType;
+  brightness: number;    // -1 to 1
+  contrast: number;      // -1 to 1
+  threshold: number;     // 0-1
+  invert: boolean;
+  gamma: number;         // 0.2 to 5
+  density: number;       // 0-1
+  sizeRange: number;     // 0-1
+  spacing: number;       // 0-1
+  rotation: number;      // 0-360
+  width: number;
+  height: number;
+  padding: number;
+  foregroundColor: string;
+  backgroundColor: string;
+  transparentBackground: boolean;
+  showBackground: boolean;
+  invertColors: boolean;
+  showFrame: boolean;
+  frameRadius: number;
+  sizePreset: SizePreset;
+  advancedMode: boolean;
+}
+
 export interface SavedPreset {
   id: string;
   name: string;
@@ -49,6 +84,12 @@ export const VARIANT_LABELS: Record<HalftoneVariant, string> = {
   "helio-circles": "Helio Circles",
   "noise-scatter": "Noise Scatter",
   "wave-dashes": "Wave Dashes",
+};
+
+export const IMAGE_PATTERN_LABELS: Record<ImagePatternType, string> = {
+  "dot-grid": "Dot Grid",
+  "square-grid": "Square Grid",
+  "triangle-grid": "Triangle Grid",
 };
 
 export const WAVE_TYPE_LABELS: Record<WaveType, string> = {
