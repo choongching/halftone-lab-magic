@@ -72,3 +72,40 @@
     font-family: 'JetBrains Mono', monospace;
   }
 }
+
+.halftone-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: hsl(var(--secondary));
+  outline: none;
+  cursor: pointer;
+}
+
+.halftone-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  cursor: pointer;
+  border: 2px solid hsl(var(--background));
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.halftone-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  cursor: pointer;
+  border: 2px solid hsl(var(--background));
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.halftone-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
