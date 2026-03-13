@@ -57,6 +57,7 @@ export interface ImageConfig {
   threshold: number;     // 0-1
   invert: boolean;
   gamma: number;         // 0.2 to 5
+  wave: WaveConfig;
   density: number;       // 0-1
   sizeRange: number;     // 0-1
   spacing: number;       // 0-1
