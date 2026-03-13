@@ -100,9 +100,16 @@ export const IMAGE_PATTERN_LABELS: Record<ImagePatternType, string> = {
 
 export const WAVE_TYPE_LABELS: Record<WaveType, string> = {
   sine: "Sine",
-  cosine: "Cosine",
   triangle: "Triangle",
   noise: "Noise",
+};
+
+export const DEFAULT_WAVE_CONFIG: WaveConfig = {
+  enabled: false,
+  type: "sine",
+  amplitude: 0.25,
+  frequency: 1.0,
+  phaseOffset: 0,
 };
 
 export const SIZE_PRESET_DIMENSIONS: Record<Exclude<SizePreset, 'custom'>, { width: number; height: number }> = {
