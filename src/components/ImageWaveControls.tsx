@@ -6,13 +6,13 @@ import { cn } from "@/lib/utils";
 const WAVE_TYPES: WaveType[] = ["sine", "triangle", "noise"];
 
 export function ImageWaveControls() {
-  const { imageConfig, setImageConfig } = useHalftoneStore();
+  const { config, setConfig } = useHalftoneStore();
 
-  if (!imageConfig.advancedMode) return null;
+  if (!config.advancedMode) return null;
 
-  const wave = imageConfig.wave;
+  const wave = config.wave;
   const setWave = (partial: Partial<typeof wave>) =>
-    setImageConfig({ wave: { ...wave, ...partial } });
+    setConfig({ wave: { ...wave, ...partial } });
 
   return (
     <ControlSection title="Wave Field">

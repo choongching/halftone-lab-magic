@@ -14,7 +14,7 @@ const PALETTE_SWATCHES = [
 ];
 
 export function ImageColorControls() {
-  const { imageConfig, setImageConfig } = useHalftoneStore();
+  const { config, setConfig } = useHalftoneStore();
 
   return (
     <ControlSection title="Color">
@@ -24,12 +24,12 @@ export function ImageColorControls() {
           <div className="flex items-center gap-2">
             <input
               type="color"
-              value={imageConfig.foregroundColor}
-              onChange={(e) => setImageConfig({ foregroundColor: e.target.value })}
+              value={config.foregroundColor}
+              onChange={(e) => setConfig({ foregroundColor: e.target.value })}
               className="h-7 w-7 cursor-pointer rounded border-0 bg-transparent p-0"
             />
             <span className="font-mono text-[10px] text-muted-foreground">
-              {imageConfig.foregroundColor}
+              {config.foregroundColor}
             </span>
           </div>
         </div>
@@ -38,12 +38,12 @@ export function ImageColorControls() {
           <div className="flex items-center gap-2">
             <input
               type="color"
-              value={imageConfig.backgroundColor}
-              onChange={(e) => setImageConfig({ backgroundColor: e.target.value })}
+              value={config.backgroundColor}
+              onChange={(e) => setConfig({ backgroundColor: e.target.value })}
               className="h-7 w-7 cursor-pointer rounded border-0 bg-transparent p-0"
             />
             <span className="font-mono text-[10px] text-muted-foreground">
-              {imageConfig.backgroundColor}
+              {config.backgroundColor}
             </span>
           </div>
         </div>
@@ -51,15 +51,15 @@ export function ImageColorControls() {
       <div className="flex items-center justify-between">
         <span className="text-xs text-secondary-foreground">Invert Colors</span>
         <button
-          onClick={() => setImageConfig({ invertColors: !imageConfig.invertColors })}
+          onClick={() => setConfig({ invertColors: !config.invertColors })}
           className={cn(
             "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-            imageConfig.invertColors
+            config.invertColors
               ? "bg-primary text-primary-foreground"
               : "bg-secondary text-secondary-foreground"
           )}
         >
-          {imageConfig.invertColors ? "On" : "Off"}
+          {config.invertColors ? "On" : "Off"}
         </button>
       </div>
       <div className="space-y-1.5">
@@ -68,9 +68,7 @@ export function ImageColorControls() {
           {PALETTE_SWATCHES.map((s, i) => (
             <button
               key={i}
-              onClick={() =>
-                setImageConfig({ foregroundColor: s.fg, backgroundColor: s.bg })
-              }
+              onClick={() => setConfig({ foregroundColor: s.fg, backgroundColor: s.bg })}
               className="flex h-6 w-6 overflow-hidden rounded-md border border-border"
               title={`${s.fg} on ${s.bg}`}
             >
