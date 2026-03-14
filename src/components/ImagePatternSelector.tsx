@@ -5,17 +5,17 @@ import { cn } from "@/lib/utils";
 const PATTERNS: ImagePatternType[] = ["dot-grid", "square-grid", "triangle-grid"];
 
 export function ImagePatternSelector() {
-  const { imageConfig, setImageConfig } = useHalftoneStore();
+  const { config, setConfig } = useHalftoneStore();
 
   return (
     <div className="flex flex-wrap gap-1.5">
       {PATTERNS.map((p) => (
         <button
           key={p}
-          onClick={() => setImageConfig({ patternType: p })}
+          onClick={() => setConfig({ patternType: p })}
           className={cn(
             "rounded-md px-2.5 py-1.5 text-[11px] font-medium transition-all",
-            imageConfig.patternType === p
+            config.patternType === p
               ? "bg-primary text-primary-foreground"
               : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
           )}
