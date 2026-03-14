@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp"];
 
 export function ImageUpload() {
-  const { imageConfig, setSourceImage, removeSourceImage } = useHalftoneStore();
+  const { config: imageConfig, setSourceImage, removeSourceImage } = useHalftoneStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -1,7 +1,7 @@
-import type { HalftoneConfig } from "@/types/halftone";
+import type { ImageConfig } from "@/types/halftone";
 
-export function downloadSvg(svgString: string, config: HalftoneConfig) {
-  const filename = `halftone-lab-${config.variant}-${config.width}x${config.height}.svg`;
+export function downloadSvg(svgString: string, config: ImageConfig) {
+  const filename = `halftone-lab-${config.patternType}-${config.width}x${config.height}.svg`;
   const blob = new Blob([svgString], { type: "image/svg+xml" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -11,8 +11,8 @@ export function downloadSvg(svgString: string, config: HalftoneConfig) {
   URL.revokeObjectURL(url);
 }
 
-export function downloadPng(svgString: string, config: HalftoneConfig) {
-  const filename = `halftone-lab-${config.variant}-${config.width}x${config.height}.png`;
+export function downloadPng(svgString: string, config: ImageConfig) {
+  const filename = `halftone-lab-${config.patternType}-${config.width}x${config.height}.png`;
   const canvas = document.createElement("canvas");
   canvas.width = config.width;
   canvas.height = config.height;

@@ -1,29 +1,33 @@
 import { useMemo } from "react";
 import { useHalftoneStore } from "@/store/halftoneStore";
-import { renderHalftone } from "@/engine/renderers";
 import { renderImageHalftone } from "@/engine/imageRenderer";
 import { useImageLuminance } from "@/hooks/useImageLuminance";
 import { Upload } from "lucide-react";
 
 export function PreviewStage() {
-  const mode = useHalftoneStore((s) => s.mode);
   const config = useHalftoneStore((s) => s.config);
-  const imageConfig = useHalftoneStore((s) => s.imageConfig);
+  const lumaMap = useImageLuminance(config);
 
-  if (mode === "image") {
-    return <ImagePreview />;
-  }
-
-  return <ProceduralPreview />;
-}
-
-function ProceduralPreview() {
-  const config = useHalftoneStore((s) => s.config);
-  const elements = useMemo(() => renderHalftone(config), [config]);
+  const elements = useMemo(() => {
+    if (!lumaMap) return [];
+    return renderImageHalftone(config, lumaMap);
+  }, [config, lumaMap]);
 
   const fg = config.invertColors ? config.backgroundColor : config.foregroundColor;
   const bg = config.invertColors ? config.foregroundColor : config.backgroundColor;
   const showBg = config.showBackground && !config.transparentBackground;
+
+  if (!config.sourceImageUrl) {
+    return (
+      <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
+        <div className="flex flex-col items-center gap-3 text-muted-foreground">
+          <Upload className="h-10 w-10 opacity-30" />
+          <p className="text-sm">Upload an image to get started</p>
+          <p className="text-xs opacity-50">Use the Source Image section in the left panel</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
@@ -47,65 +51,8 @@ function ProceduralPreview() {
           }}
         >
           {showBg && <rect width={config.width} height={config.height} fill={bg} />}
-          {!showBg && config.transparentBackground && <CheckerPattern w={config.width} h={config.height} />}
-          <g fill={fg} stroke={fg}>
-            {elements.map((el, i) => renderElement(el, i))}
-          </g>
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function ImagePreview() {
-  const imageConfig = useHalftoneStore((s) => s.imageConfig);
-  const lumaMap = useImageLuminance(imageConfig);
-
-  const elements = useMemo(() => {
-    if (!lumaMap) return [];
-    return renderImageHalftone(imageConfig, lumaMap);
-  }, [imageConfig, lumaMap]);
-
-  const fg = imageConfig.invertColors ? imageConfig.backgroundColor : imageConfig.foregroundColor;
-  const bg = imageConfig.invertColors ? imageConfig.foregroundColor : imageConfig.backgroundColor;
-  const showBg = imageConfig.showBackground && !imageConfig.transparentBackground;
-
-  if (!imageConfig.sourceImageUrl) {
-    return (
-      <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
-        <div className="flex flex-col items-center gap-3 text-muted-foreground">
-          <Upload className="h-10 w-10 opacity-30" />
-          <p className="text-sm">Upload an image to get started</p>
-          <p className="text-xs opacity-50">Use the Source Image section in the left panel</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
-      <div
-        className="relative shrink-0"
-        style={{
-          borderRadius: imageConfig.showFrame ? imageConfig.frameRadius : 0,
-          overflow: imageConfig.showFrame ? "hidden" : "visible",
-          boxShadow: imageConfig.showFrame ? "0 8px 40px rgba(0,0,0,0.5)" : "none",
-          maxWidth: "100%",
-          maxHeight: "100%",
-        }}
-      >
-        <svg
-          viewBox={`0 0 ${imageConfig.width} ${imageConfig.height}`}
-          style={{
-            width: "100%",
-            height: "100%",
-            maxWidth: Math.min(imageConfig.width, 900),
-            maxHeight: Math.min(imageConfig.height, 700),
-          }}
-        >
-          {showBg && <rect width={imageConfig.width} height={imageConfig.height} fill={bg} />}
-          {!showBg && imageConfig.transparentBackground && (
-            <CheckerPattern w={imageConfig.width} h={imageConfig.height} />
+          {!showBg && config.transparentBackground && (
+            <CheckerPattern w={config.width} h={config.height} />
           )}
           <g fill={fg} stroke={fg}>
             {elements.map((el, i) => renderElement(el, i))}
