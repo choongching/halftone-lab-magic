@@ -46,8 +46,6 @@ export function PreviewStage() {
           style={{
             width: "100%",
             height: "100%",
-            maxWidth: Math.min(config.width, 900),
-            maxHeight: Math.min(config.height, 700),
           }}
         >
           {showBg && <rect width={config.width} height={config.height} fill={bg} />}
