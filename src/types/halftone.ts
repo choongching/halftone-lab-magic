@@ -26,9 +26,9 @@ export interface ImageConfig {
   invert: boolean;
   gamma: number;         // 0.2 to 5
   wave: WaveConfig;
-  density: number;       // 0-1
+  columns: number;       // 5-200
+  rows: number;          // 5-200
   sizeRange: number;     // 0-1
-  spacing: number;       // 0-1
   rotation: number;      // 0-360
   width: number;
   height: number;

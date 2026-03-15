@@ -8,10 +8,16 @@ interface SvgElement {
   props: Record<string, string | number>;
 }
 
-function getGridStep(config: ImageConfig): number {
-  const baseStep = 8 + (1 - config.density) * 40;
-  const spacingFactor = 0.5 + config.spacing * 1.5;
-  return baseStep * spacingFactor;
+/** Max elements to render for performance safety */
+const MAX_ELEMENTS = 40_000;
+
+function getSteps(config: ImageConfig): { stepX: number; stepY: number } {
+  const usableW = config.width - config.padding * 2;
+  const usableH = config.height - config.padding * 2;
+  return {
+    stepX: usableW / config.columns,
+    stepY: usableH / config.rows,
+  };
 }
 
 function applyWave(config: ImageConfig, x: number, y: number, baseSize: number): number {
@@ -22,22 +28,24 @@ function applyWave(config: ImageConfig, x: number, y: number, baseSize: number):
     height: config.height,
     wave: config.wave,
   });
-  // Softer modulation in image mode to preserve subject recognizability
   const softModifier = 1 - (1 - modifier) * 0.7;
   return Math.max(0, baseSize * softModifier);
 }
 
 export function renderImageDotGrid(config: ImageConfig, lumaMap: LuminanceMap): SvgElement[] {
   const elements: SvgElement[] = [];
-  const step = getGridStep(config);
+  const { stepX, stepY } = getSteps(config);
   const pad = config.padding;
   const rot = (config.rotation * Math.PI) / 180;
   const cx = config.width / 2;
   const cy = config.height / 2;
-  const maxSize = 2 + config.sizeRange * 18;
+  const maxSize = Math.min(stepX, stepY) * 0.5 * (0.2 + config.sizeRange * 0.8);
 
-  for (let y = pad; y < config.height - pad; y += step) {
-    for (let x = pad; x < config.width - pad; x += step) {
+  for (let row = 0; row < config.rows && elements.length < MAX_ELEMENTS; row++) {
+    const y = pad + stepY * (row + 0.5);
+    for (let col = 0; col < config.columns && elements.length < MAX_ELEMENTS; col++) {
+      const x = pad + stepX * (col + 0.5);
+
       const dx = x - cx, dy = y - cy;
       const rx = cx + dx * Math.cos(rot) - dy * Math.sin(rot);
       const ry = cy + dx * Math.sin(rot) + dy * Math.cos(rot);
@@ -61,15 +69,18 @@ export function renderImageDotGrid(config: ImageConfig, lumaMap: LuminanceMap): 
 
 export function renderImageSquareGrid(config: ImageConfig, lumaMap: LuminanceMap): SvgElement[] {
   const elements: SvgElement[] = [];
-  const step = getGridStep(config);
+  const { stepX, stepY } = getSteps(config);
   const pad = config.padding;
   const rot = (config.rotation * Math.PI) / 180;
   const cx = config.width / 2;
   const cy = config.height / 2;
-  const maxSize = 2 + config.sizeRange * 18;
+  const maxSize = Math.min(stepX, stepY) * (0.2 + config.sizeRange * 0.8);
 
-  for (let y = pad; y < config.height - pad; y += step) {
-    for (let x = pad; x < config.width - pad; x += step) {
+  for (let row = 0; row < config.rows && elements.length < MAX_ELEMENTS; row++) {
+    const y = pad + stepY * (row + 0.5);
+    for (let col = 0; col < config.columns && elements.length < MAX_ELEMENTS; col++) {
+      const x = pad + stepX * (col + 0.5);
+
       const dx = x - cx, dy = y - cy;
       const rx = cx + dx * Math.cos(rot) - dy * Math.sin(rot);
       const ry = cy + dx * Math.sin(rot) + dy * Math.cos(rot);
@@ -78,7 +89,7 @@ export function renderImageSquareGrid(config: ImageConfig, lumaMap: LuminanceMap
 
       const lum = sampleLuminance(lumaMap, x, y);
       const darkness = 1 - lum;
-      const s = applyWave(config, x, y, darkness * maxSize * 1.8);
+      const s = applyWave(config, x, y, darkness * maxSize);
 
       if (s > 0.5) {
         elements.push({
@@ -98,17 +109,20 @@ export function renderImageSquareGrid(config: ImageConfig, lumaMap: LuminanceMap
 
 export function renderImageTriangleGrid(config: ImageConfig, lumaMap: LuminanceMap): SvgElement[] {
   const elements: SvgElement[] = [];
-  const step = getGridStep(config);
+  const { stepX, stepY } = getSteps(config);
   const pad = config.padding;
   const rot = (config.rotation * Math.PI) / 180;
   const cx = config.width / 2;
   const cy = config.height / 2;
-  const maxSize = 2 + config.sizeRange * 18;
-  let row = 0;
+  const maxSize = Math.min(stepX, stepY) * (0.2 + config.sizeRange * 0.8);
 
-  for (let y = pad; y < config.height - pad; y += step * 0.866) {
-    const offset = row % 2 === 0 ? 0 : step / 2;
-    for (let x = pad + offset; x < config.width - pad; x += step) {
+  for (let row = 0; row < config.rows && elements.length < MAX_ELEMENTS; row++) {
+    const y = pad + stepY * (row + 0.5);
+    const offset = row % 2 === 0 ? 0 : stepX / 2;
+    for (let col = 0; col < config.columns && elements.length < MAX_ELEMENTS; col++) {
+      const x = pad + offset + stepX * (col + 0.5);
+      if (x > config.width - pad) continue;
+
       const dx = x - cx, dy = y - cy;
       const rx = cx + dx * Math.cos(rot) - dy * Math.sin(rot);
       const ry = cy + dx * Math.sin(rot) + dy * Math.cos(rot);
@@ -117,16 +131,15 @@ export function renderImageTriangleGrid(config: ImageConfig, lumaMap: LuminanceM
 
       const lum = sampleLuminance(lumaMap, x, y);
       const darkness = 1 - lum;
-      const s = applyWave(config, x, y, darkness * maxSize * 2);
+      const s = applyWave(config, x, y, darkness * maxSize);
 
       if (s > 0.5) {
-        const flip = (row + Math.floor(x / step)) % 2 === 0 ? 1 : -1;
+        const flip = (row + col) % 2 === 0 ? 1 : -1;
         const h = s * 0.866;
         const points = `${rx.toFixed(2)},${(ry - h * flip / 2).toFixed(2)} ${(rx - s / 2).toFixed(2)},${(ry + h * flip / 2).toFixed(2)} ${(rx + s / 2).toFixed(2)},${(ry + h * flip / 2).toFixed(2)}`;
         elements.push({ type: "polygon", props: { points } });
       }
     }
-    row++;
   }
   return elements;
 }

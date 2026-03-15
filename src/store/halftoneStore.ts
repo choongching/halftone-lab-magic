@@ -73,9 +73,9 @@ export const useHalftoneStore = create<HalftoneStore>((set, get) => ({
       config: {
         ...state.config,
         patternType: patterns[Math.floor(Math.random() * patterns.length)],
-        density: randomBetween(0.3, 0.7),
+        columns: Math.floor(randomBetween(20, 80)),
+        rows: Math.floor(randomBetween(20, 80)),
         sizeRange: randomBetween(0.3, 0.7),
-        spacing: randomBetween(0.3, 0.6),
         brightness: randomBetween(-0.3, 0.3),
         contrast: randomBetween(-0.2, 0.5),
         threshold: randomBetween(0.05, 0.3),
