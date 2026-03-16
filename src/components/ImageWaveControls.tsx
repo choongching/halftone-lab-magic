@@ -15,9 +15,9 @@ export function ImageWaveControls() {
     setConfig({ wave: { ...wave, ...partial } });
 
   return (
-    <ControlSection title="Wave Distortion">
+    <ControlSection title="Waviness">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Enable Wave</span>
+        <span className="text-xs text-secondary-foreground">Add Waves</span>
         <button
           onClick={() => setWave({ enabled: !wave.enabled })}
           className={cn(
