@@ -6,7 +6,7 @@ export function ToneMappingControls() {
   const { config, setConfig } = useHalftoneStore();
 
   return (
-    <ControlSection title="Tone Mapping">
+    <ControlSection title="Light & Shadow">
       <SliderRow
         label="Brightness"
         value={config.brightness}
