@@ -34,7 +34,7 @@ export function ImageColorControls() {
           </div>
         </div>
         <div className="space-y-1">
-          <span className="text-[10px] text-muted-foreground">Background</span>
+          <span className="text-[10px] text-muted-foreground">Canvas Color</span>
           <div className="flex items-center gap-2">
             <input
               type="color"
