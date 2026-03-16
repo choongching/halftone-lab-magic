@@ -33,7 +33,7 @@ export function ImageWaveControls() {
       {wave.enabled && (
         <>
           <div className="space-y-1.5">
-            <span className="text-xs text-secondary-foreground">Wave Type</span>
+            <span className="text-xs text-secondary-foreground">Style</span>
             <div className="flex gap-1.5">
               {WAVE_TYPES.map((wt) => (
                 <button
