@@ -33,9 +33,9 @@ export function ControlPanel() {
         <div className="space-y-5 p-4">
           <ImageUpload />
           <div className="h-px bg-border" />
-          <ControlSection title="Display">
+          <ControlSection title="Look & Feel">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-secondary-foreground">Invert Colors</span>
+              <span className="text-xs text-secondary-foreground">Flip Colors</span>
               <button
                 onClick={() => setConfig({ invertColors: !config.invertColors })}
                 className={cn(
