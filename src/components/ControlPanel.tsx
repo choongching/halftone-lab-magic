@@ -12,7 +12,7 @@ import { ControlSection } from "./ControlSection";
 import { cn } from "@/lib/utils";
 
 export function ControlPanel() {
-  const { config, toggleAdvancedMode } = useHalftoneStore();
+  const { config, setConfig, toggleAdvancedMode } = useHalftoneStore();
 
   return (
     <div className="flex h-full w-[300px] flex-col border-r border-border bg-card">
