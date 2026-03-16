@@ -32,7 +32,7 @@ export function ToneMappingControls() {
         onChange={(v) => setConfig({ threshold: v })}
       />
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Invert</span>
+        <span className="text-xs text-secondary-foreground">Flip Tones</span>
         <button
           onClick={() => setConfig({ invert: !config.invert })}
           className={cn(
