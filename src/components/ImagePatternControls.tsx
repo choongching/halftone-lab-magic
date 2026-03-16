@@ -29,7 +29,7 @@ export function ImagePatternControls() {
         displayValue={`${config.rows}`}
       />
       <SliderRow
-        label="Size Range"
+        label="Shape Size"
         value={config.sizeRange}
         onChange={(v) => setConfig({ sizeRange: v })}
       />
@@ -41,7 +41,7 @@ export function ImagePatternControls() {
       )}
       {config.advancedMode && (
         <SliderRow
-          label="Rotation"
+          label="Angle"
           value={config.rotation}
           min={0}
           max={360}

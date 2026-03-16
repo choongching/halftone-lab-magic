@@ -6,7 +6,7 @@ export function ToneMappingControls() {
   const { config, setConfig } = useHalftoneStore();
 
   return (
-    <ControlSection title="Tone Mapping">
+    <ControlSection title="Light & Shadow">
       <SliderRow
         label="Brightness"
         value={config.brightness}
@@ -24,7 +24,7 @@ export function ToneMappingControls() {
         onChange={(v) => setConfig({ contrast: v })}
       />
       <SliderRow
-        label="Threshold"
+        label="Cutoff"
         value={config.threshold}
         min={0}
         max={1}
@@ -32,7 +32,7 @@ export function ToneMappingControls() {
         onChange={(v) => setConfig({ threshold: v })}
       />
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Invert</span>
+        <span className="text-xs text-secondary-foreground">Flip Tones</span>
         <button
           onClick={() => setConfig({ invert: !config.invert })}
           className={cn(
@@ -47,7 +47,7 @@ export function ToneMappingControls() {
       </div>
       {config.advancedMode && (
         <SliderRow
-          label="Gamma"
+          label="Midtones"
           value={config.gamma}
           min={0.2}
           max={5}

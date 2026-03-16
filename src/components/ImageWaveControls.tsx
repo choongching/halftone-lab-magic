@@ -15,9 +15,9 @@ export function ImageWaveControls() {
     setConfig({ wave: { ...wave, ...partial } });
 
   return (
-    <ControlSection title="Wave Distortion">
+    <ControlSection title="Waviness">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Enable Wave</span>
+        <span className="text-xs text-secondary-foreground">Add Waves</span>
         <button
           onClick={() => setWave({ enabled: !wave.enabled })}
           className={cn(
@@ -33,7 +33,7 @@ export function ImageWaveControls() {
       {wave.enabled && (
         <>
           <div className="space-y-1.5">
-            <span className="text-xs text-secondary-foreground">Wave Type</span>
+            <span className="text-xs text-secondary-foreground">Style</span>
             <div className="flex gap-1.5">
               {WAVE_TYPES.map((wt) => (
                 <button
@@ -51,9 +51,9 @@ export function ImageWaveControls() {
               ))}
             </div>
           </div>
-          <SliderRow label="Amplitude" value={wave.amplitude} onChange={(v) => setWave({ amplitude: v })} />
-          <SliderRow label="Frequency" value={wave.frequency} min={0.1} max={8} step={0.1} onChange={(v) => setWave({ frequency: v })} />
-          <SliderRow label="Phase Offset" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
+          <SliderRow label="Intensity" value={wave.amplitude} onChange={(v) => setWave({ amplitude: v })} />
+          <SliderRow label="Density" value={wave.frequency} min={0.1} max={8} step={0.1} onChange={(v) => setWave({ frequency: v })} />
+          <SliderRow label="Shift" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
         </>
       )}
     </ControlSection>

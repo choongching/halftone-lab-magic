@@ -16,7 +16,7 @@ export function ImageCanvasControls() {
   const { config, setConfig, setSizePreset } = useHalftoneStore();
 
   return (
-    <ControlSection title="Canvas">
+    <ControlSection title="Size">
       <div className="flex gap-1.5 flex-wrap">
         {SIZE_PRESETS.map((sp) => (
           <button
@@ -60,7 +60,7 @@ export function ImageCanvasControls() {
       {config.advancedMode && (
         <>
           <SliderRow
-            label="Padding"
+            label="Margin"
             value={config.padding}
             min={0}
             max={200}
@@ -69,7 +69,7 @@ export function ImageCanvasControls() {
             displayValue={`${config.padding}px`}
           />
           <div className="space-y-1.5">
-            <span className="text-xs text-secondary-foreground">Fit Mode</span>
+            <span className="text-xs text-secondary-foreground">Image Fit</span>
             <div className="flex gap-1.5">
               {(["contain", "cover"] as const).map((fm) => (
                 <button
@@ -88,7 +88,7 @@ export function ImageCanvasControls() {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-secondary-foreground">Background</span>
+            <span className="text-xs text-secondary-foreground">Show BG</span>
             <button
               onClick={() => setConfig({ showBackground: !config.showBackground })}
               className={cn(
@@ -102,7 +102,7 @@ export function ImageCanvasControls() {
             </button>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-secondary-foreground">Transparent BG</span>
+            <span className="text-xs text-secondary-foreground">See-Through BG</span>
             <button
               onClick={() => setConfig({ transparentBackground: !config.transparentBackground })}
               className={cn(

@@ -26,16 +26,16 @@ export function ControlPanel() {
               : "bg-secondary text-secondary-foreground"
           )}
         >
-          {config.advancedMode ? "Advanced" : "Basic"}
+          {config.advancedMode ? "Pro Mode" : "Simple"}
         </button>
       </div>
       <ScrollArea className="flex-1">
         <div className="space-y-5 p-4">
           <ImageUpload />
           <div className="h-px bg-border" />
-          <ControlSection title="Display">
+          <ControlSection title="Look & Feel">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-secondary-foreground">Invert Colors</span>
+              <span className="text-xs text-secondary-foreground">Flip Colors</span>
               <button
                 onClick={() => setConfig({ invertColors: !config.invertColors })}
                 className={cn(
@@ -50,7 +50,7 @@ export function ControlPanel() {
             </div>
           </ControlSection>
           <div className="h-px bg-border" />
-          <ControlSection title="Pattern">
+          <ControlSection title="Shape Style">
             <ImagePatternSelector />
             <ImagePatternControls />
           </ControlSection>

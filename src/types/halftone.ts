@@ -45,15 +45,15 @@ export interface ImageConfig {
 }
 
 export const IMAGE_PATTERN_LABELS: Record<ImagePatternType, string> = {
-  "dot-grid": "Dot Grid",
-  "square-grid": "Square Grid",
-  "triangle-grid": "Triangle Grid",
+  "dot-grid": "Dots",
+  "square-grid": "Squares",
+  "triangle-grid": "Triangles",
 };
 
 export const WAVE_TYPE_LABELS: Record<WaveType, string> = {
-  sine: "Sine",
-  triangle: "Triangle",
-  noise: "Noise",
+  sine: "Smooth",
+  triangle: "Zigzag",
+  noise: "Random",
 };
 
 export const DEFAULT_WAVE_CONFIG: WaveConfig = {

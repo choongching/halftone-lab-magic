@@ -17,10 +17,10 @@ export function ImageColorControls() {
   const { config, setConfig } = useHalftoneStore();
 
   return (
-    <ControlSection title="Color">
+    <ControlSection title="Colors">
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1">
-          <span className="text-[10px] text-muted-foreground">Foreground</span>
+          <span className="text-[10px] text-muted-foreground">Shape Color</span>
           <div className="flex items-center gap-2">
             <input
               type="color"
@@ -34,7 +34,7 @@ export function ImageColorControls() {
           </div>
         </div>
         <div className="space-y-1">
-          <span className="text-[10px] text-muted-foreground">Background</span>
+          <span className="text-[10px] text-muted-foreground">Canvas Color</span>
           <div className="flex items-center gap-2">
             <input
               type="color"
@@ -49,7 +49,7 @@ export function ImageColorControls() {
         </div>
       </div>
       <div className="space-y-1.5">
-        <span className="text-[10px] text-muted-foreground">Swatches</span>
+        <span className="text-[10px] text-muted-foreground">Quick Picks</span>
         <div className="flex flex-wrap gap-1.5">
           {PALETTE_SWATCHES.map((s, i) => (
             <button
