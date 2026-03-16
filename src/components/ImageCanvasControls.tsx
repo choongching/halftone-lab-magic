@@ -69,7 +69,7 @@ export function ImageCanvasControls() {
             displayValue={`${config.padding}px`}
           />
           <div className="space-y-1.5">
-            <span className="text-xs text-secondary-foreground">Fit Mode</span>
+            <span className="text-xs text-secondary-foreground">Image Fit</span>
             <div className="flex gap-1.5">
               {(["contain", "cover"] as const).map((fm) => (
                 <button
