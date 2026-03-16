@@ -16,7 +16,21 @@ export function ControlPanel() {
 
   return (
     <div className="flex h-full w-[300px] flex-col border-r border-border bg-card">
-      <div className="flex items-center justify-end border-b border-border px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-secondary-foreground">Invert</span>
+          <button
+            onClick={() => setConfig({ invertColors: !config.invertColors })}
+            className={cn(
+              "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
+              config.invertColors
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary text-secondary-foreground"
+            )}
+          >
+            {config.invertColors ? "On" : "Off"}
+          </button>
+        </div>
         <button
           onClick={toggleAdvancedMode}
           className={cn(
