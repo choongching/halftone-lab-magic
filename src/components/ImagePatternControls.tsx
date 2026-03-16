@@ -50,6 +50,6 @@ export function ImagePatternControls() {
           displayValue={`${config.rotation}°`}
         />
       )}
-    </ControlSection>
+    </>
   );
 }
