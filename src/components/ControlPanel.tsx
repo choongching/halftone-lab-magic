@@ -10,6 +10,7 @@ import { ImagePreviewControls } from "./ImagePreviewControls";
 import { ImageWaveControls } from "./ImageWaveControls";
 import { ControlSection } from "./ControlSection";
 import { cn } from "@/lib/utils";
+import { HelpTip } from "./HelpTip";
 
 export function ControlPanel() {
   const { config, setConfig, toggleAdvancedMode } = useHalftoneStore();
@@ -33,9 +34,12 @@ export function ControlPanel() {
         <div className="space-y-5 p-4">
           <ImageUpload />
           <div className="h-px bg-border" />
-          <ControlSection title="Look & Feel">
+          <ControlSection title="Look & Feel" tooltip="General display settings for your artwork">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-secondary-foreground">Flip Colors</span>
+              <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+                Flip Colors
+                <HelpTip text="Swap the shape and background colors" />
+              </span>
               <button
                 onClick={() => setConfig({ invertColors: !config.invertColors })}
                 className={cn(
@@ -50,7 +54,7 @@ export function ControlPanel() {
             </div>
           </ControlSection>
           <div className="h-px bg-border" />
-          <ControlSection title="Shape Style">
+          <ControlSection title="Shape Style" tooltip="Choose the shape type and adjust the pattern grid">
             <ImagePatternSelector />
             <ImagePatternControls />
           </ControlSection>

@@ -12,6 +12,7 @@ export function ImagePatternControls() {
     <>
       <SliderRow
         label="Columns"
+        tooltip="Number of shapes across the width"
         value={config.columns}
         min={5}
         max={200}
@@ -21,6 +22,7 @@ export function ImagePatternControls() {
       />
       <SliderRow
         label="Rows"
+        tooltip="Number of shapes down the height"
         value={config.rows}
         min={5}
         max={200}
@@ -30,6 +32,7 @@ export function ImagePatternControls() {
       />
       <SliderRow
         label="Shape Size"
+        tooltip="How big each shape can grow based on brightness"
         value={config.sizeRange}
         onChange={(v) => setConfig({ sizeRange: v })}
       />
@@ -42,6 +45,7 @@ export function ImagePatternControls() {
       {config.advancedMode && (
         <SliderRow
           label="Angle"
+          tooltip="Rotate the entire pattern"
           value={config.rotation}
           min={0}
           max={360}

@@ -17,7 +17,7 @@ export function ImageColorControls() {
   const { config, setConfig } = useHalftoneStore();
 
   return (
-    <ControlSection title="Colors">
+    <ControlSection title="Colors" tooltip="Pick colors for your shapes and background">
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1">
           <span className="text-[10px] text-muted-foreground">Shape Color</span>
