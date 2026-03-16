@@ -8,7 +8,7 @@ export function ImagePreviewControls() {
   if (!config.advancedMode) return null;
 
   return (
-    <ControlSection title="Preview">
+    <ControlSection title="Frame">
       <div className="flex items-center justify-between">
         <span className="text-xs text-secondary-foreground">Show Frame</span>
         <button

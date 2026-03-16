@@ -9,7 +9,7 @@ export function ImagePatternControls() {
   const showWarning = totalElements > 10_000;
 
   return (
-    <ControlSection title="Pattern">
+    <>
       <SliderRow
         label="Columns"
         value={config.columns}
@@ -50,6 +50,6 @@ export function ImagePatternControls() {
           displayValue={`${config.rotation}°`}
         />
       )}
-    </ControlSection>
+    </>
   );
 }

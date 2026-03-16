@@ -52,9 +52,8 @@ export function ControlPanel() {
           <div className="h-px bg-border" />
           <ControlSection title="Pattern">
             <ImagePatternSelector />
+            <ImagePatternControls />
           </ControlSection>
-          <div className="h-px bg-border" />
-          <ImagePatternControls />
           <div className="h-px bg-border" />
           <ToneMappingControls />
           {config.advancedMode && (
