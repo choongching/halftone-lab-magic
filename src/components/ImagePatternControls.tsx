@@ -41,7 +41,7 @@ export function ImagePatternControls() {
       )}
       {config.advancedMode && (
         <SliderRow
-          label="Rotation"
+          label="Angle"
           value={config.rotation}
           min={0}
           max={360}

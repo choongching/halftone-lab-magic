@@ -50,7 +50,7 @@ export function ControlPanel() {
             </div>
           </ControlSection>
           <div className="h-px bg-border" />
-          <ControlSection title="Pattern">
+          <ControlSection title="Shape Style">
             <ImagePatternSelector />
             <ImagePatternControls />
           </ControlSection>

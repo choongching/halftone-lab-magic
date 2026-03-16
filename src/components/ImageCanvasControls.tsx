@@ -102,7 +102,7 @@ export function ImageCanvasControls() {
             </button>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-secondary-foreground">Transparent BG</span>
+            <span className="text-xs text-secondary-foreground">See-Through BG</span>
             <button
               onClick={() => setConfig({ transparentBackground: !config.transparentBackground })}
               className={cn(

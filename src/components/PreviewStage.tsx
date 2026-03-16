@@ -22,8 +22,8 @@ export function PreviewStage() {
       <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
         <div className="flex flex-col items-center gap-3 text-muted-foreground">
           <Upload className="h-10 w-10 opacity-30" />
-          <p className="text-sm">Upload an image to get started</p>
-          <p className="text-xs opacity-50">Use the Source Image section in the left panel</p>
+          <p className="text-sm">Drop an image to get started</p>
+          <p className="text-xs opacity-50">Add a photo using the panel on the left</p>
         </div>
       </div>
     );

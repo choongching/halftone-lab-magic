@@ -51,9 +51,9 @@ export function ImageWaveControls() {
               ))}
             </div>
           </div>
-          <SliderRow label="Amplitude" value={wave.amplitude} onChange={(v) => setWave({ amplitude: v })} />
-          <SliderRow label="Frequency" value={wave.frequency} min={0.1} max={8} step={0.1} onChange={(v) => setWave({ frequency: v })} />
-          <SliderRow label="Phase Offset" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
+          <SliderRow label="Intensity" value={wave.amplitude} onChange={(v) => setWave({ amplitude: v })} />
+          <SliderRow label="Density" value={wave.frequency} min={0.1} max={8} step={0.1} onChange={(v) => setWave({ frequency: v })} />
+          <SliderRow label="Shift" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
         </>
       )}
     </ControlSection>

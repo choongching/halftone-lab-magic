@@ -49,7 +49,7 @@ export function ImageColorControls() {
         </div>
       </div>
       <div className="space-y-1.5">
-        <span className="text-[10px] text-muted-foreground">Swatches</span>
+        <span className="text-[10px] text-muted-foreground">Quick Picks</span>
         <div className="flex flex-wrap gap-1.5">
           {PALETTE_SWATCHES.map((s, i) => (
             <button

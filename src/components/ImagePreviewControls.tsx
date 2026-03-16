@@ -25,7 +25,7 @@ export function ImagePreviewControls() {
       </div>
       {config.showFrame && (
         <SliderRow
-          label="Corner Radius"
+          label="Roundness"
           value={config.frameRadius}
           min={0}
           max={50}

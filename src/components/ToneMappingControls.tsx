@@ -47,7 +47,7 @@ export function ToneMappingControls() {
       </div>
       {config.advancedMode && (
         <SliderRow
-          label="Gamma"
+          label="Midtones"
           value={config.gamma}
           min={0.2}
           max={5}
