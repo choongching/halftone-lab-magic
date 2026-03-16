@@ -71,7 +71,7 @@ export function ImageUpload() {
           <img
             src={imageConfig.sourceImageUrl}
             alt="Source"
-            className="h-24 w-full object-cover"
+            className="h-24 w-full object-contain bg-secondary"
           />
           <div className="absolute right-1 top-1 flex gap-1">
             <button
