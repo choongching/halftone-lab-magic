@@ -60,7 +60,7 @@ export function ImageCanvasControls() {
       {config.advancedMode && (
         <>
           <SliderRow
-            label="Padding"
+            label="Margin"
             value={config.padding}
             min={0}
             max={200}
