@@ -24,7 +24,7 @@ export function ToneMappingControls() {
         onChange={(v) => setConfig({ contrast: v })}
       />
       <SliderRow
-        label="Threshold"
+        label="Cutoff"
         value={config.threshold}
         min={0}
         max={1}
