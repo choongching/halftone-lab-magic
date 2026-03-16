@@ -88,7 +88,7 @@ export function ImageCanvasControls() {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-secondary-foreground">Background</span>
+            <span className="text-xs text-secondary-foreground">Show BG</span>
             <button
               onClick={() => setConfig({ showBackground: !config.showBackground })}
               className={cn(
