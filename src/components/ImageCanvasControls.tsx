@@ -16,7 +16,7 @@ export function ImageCanvasControls() {
   const { config, setConfig, setSizePreset } = useHalftoneStore();
 
   return (
-    <ControlSection title="Canvas">
+    <ControlSection title="Size">
       <div className="flex gap-1.5 flex-wrap">
         {SIZE_PRESETS.map((sp) => (
           <button
