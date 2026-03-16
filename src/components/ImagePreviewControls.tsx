@@ -8,9 +8,9 @@ export function ImagePreviewControls() {
   if (!config.advancedMode) return null;
 
   return (
-    <ControlSection title="Frame">
+    <ControlSection title="Border">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Show Frame</span>
+        <span className="text-xs text-secondary-foreground">Add Border</span>
         <button
           onClick={() => setConfig({ showFrame: !config.showFrame })}
           className={cn(
