@@ -30,15 +30,16 @@ export function PreviewStage() {
   }
 
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
+    <div className="flex h-full w-full items-center justify-center overflow-auto p-4 bg-[hsl(240,6%,7%)]">
       <div
         className="relative shrink-0"
         style={{
           borderRadius: config.showFrame ? config.frameRadius : 0,
           overflow: config.showFrame ? "hidden" : "visible",
           boxShadow: config.showFrame ? "0 8px 40px rgba(0,0,0,0.5)" : "none",
-          maxWidth: "100%",
-          maxHeight: "100%",
+          width: "112%",
+          maxWidth: "112%",
+          maxHeight: "112%",
         }}
       >
         <svg
