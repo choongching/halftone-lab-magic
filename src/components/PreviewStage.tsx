@@ -37,9 +37,9 @@ export function PreviewStage() {
           borderRadius: config.showFrame ? config.frameRadius : 0,
           overflow: config.showFrame ? "hidden" : "visible",
           boxShadow: config.showFrame ? "0 8px 40px rgba(0,0,0,0.5)" : "none",
-          width: "112%",
-          maxWidth: "112%",
-          maxHeight: "112%",
+          width: "50%",
+          maxWidth: "50%",
+          maxHeight: "50%",
         }}
       >
         <svg
