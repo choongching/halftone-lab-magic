@@ -1,7 +1,8 @@
 import { useHalftoneStore } from "@/store/halftoneStore";
 import { ControlSection, SliderRow } from "./ControlSection";
-import { SIZE_PRESET_DIMENSIONS, type SizePreset } from "@/types/halftone";
+import { type SizePreset } from "@/types/halftone";
 import { cn } from "@/lib/utils";
+import { HelpTip } from "./HelpTip";
 
 const SIZE_PRESETS: { value: SizePreset; label: string }[] = [
   { value: "square", label: "Square" },
@@ -16,7 +17,7 @@ export function ImageCanvasControls() {
   const { config, setConfig, setSizePreset } = useHalftoneStore();
 
   return (
-    <ControlSection title="Size">
+    <ControlSection title="Size" tooltip="Set the dimensions of your final artwork">
       <div className="flex gap-1.5 flex-wrap">
         {SIZE_PRESETS.map((sp) => (
           <button
@@ -61,6 +62,7 @@ export function ImageCanvasControls() {
         <>
           <SliderRow
             label="Margin"
+            tooltip="Add breathing room around the edges of your artwork"
             value={config.padding}
             min={0}
             max={200}
@@ -69,7 +71,10 @@ export function ImageCanvasControls() {
             displayValue={`${config.padding}px`}
           />
           <div className="space-y-1.5">
-            <span className="text-xs text-secondary-foreground">Image Fit</span>
+            <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+              Image Fit
+              <HelpTip text="Fit Inside keeps the whole image visible. Fill covers the canvas, cropping edges" />
+            </span>
             <div className="flex gap-1.5">
               {(["contain", "cover"] as const).map((fm) => (
                 <button
@@ -88,7 +93,10 @@ export function ImageCanvasControls() {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-secondary-foreground">Show BG</span>
+            <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+              Show BG
+              <HelpTip text="Show or hide the background color behind the shapes" />
+            </span>
             <button
               onClick={() => setConfig({ showBackground: !config.showBackground })}
               className={cn(
@@ -102,7 +110,10 @@ export function ImageCanvasControls() {
             </button>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-secondary-foreground">See-Through BG</span>
+            <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+              See-Through BG
+              <HelpTip text="Export with a transparent background instead of a solid color" />
+            </span>
             <button
               onClick={() => setConfig({ transparentBackground: !config.transparentBackground })}
               className={cn(

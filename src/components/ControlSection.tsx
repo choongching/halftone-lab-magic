@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { HelpTip } from "./HelpTip";
 
 interface ControlSectionProps {
   title: string;
+  tooltip?: string;
   children: React.ReactNode;
   className?: string;
 }
 
-export function ControlSection({ title, children, className }: ControlSectionProps) {
+export function ControlSection({ title, tooltip, children, className }: ControlSectionProps) {
   return (
     <div className={cn("space-y-3", className)}>
-      <h3 className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{title}</h3>
+      <h3 className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        {title}
+        {tooltip && <HelpTip text={tooltip} />}
+      </h3>
       <div className="space-y-3">{children}</div>
     </div>
   );
@@ -18,6 +23,7 @@ export function ControlSection({ title, children, className }: ControlSectionPro
 
 interface SliderRowProps {
   label: string;
+  tooltip?: string;
   value: number;
   min?: number;
   max?: number;
@@ -26,7 +32,7 @@ interface SliderRowProps {
   displayValue?: string;
 }
 
-export function SliderRow({ label, value, min = 0, max = 1, step = 0.01, onChange, displayValue }: SliderRowProps) {
+export function SliderRow({ label, tooltip, value, min = 0, max = 1, step = 0.01, onChange, displayValue }: SliderRowProps) {
   const [localValue, setLocalValue] = useState(value);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const isDragging = useRef(false);
@@ -56,7 +62,10 @@ export function SliderRow({ label, value, min = 0, max = 1, step = 0.01, onChang
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">{label}</span>
+        <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+          {label}
+          {tooltip && <HelpTip text={tooltip} />}
+        </span>
         <span className="font-mono text-[10px] text-muted-foreground">{display}</span>
       </div>
       <input

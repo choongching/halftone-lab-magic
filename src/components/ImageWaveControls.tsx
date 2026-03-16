@@ -2,6 +2,7 @@ import { useHalftoneStore } from "@/store/halftoneStore";
 import { ControlSection, SliderRow } from "./ControlSection";
 import { WAVE_TYPE_LABELS, type WaveType } from "@/types/halftone";
 import { cn } from "@/lib/utils";
+import { HelpTip } from "./HelpTip";
 
 const WAVE_TYPES: WaveType[] = ["sine", "triangle", "noise"];
 
@@ -15,9 +16,12 @@ export function ImageWaveControls() {
     setConfig({ wave: { ...wave, ...partial } });
 
   return (
-    <ControlSection title="Waviness">
+    <ControlSection title="Waviness" tooltip="Add a wavy distortion effect to the pattern">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Add Waves</span>
+        <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+          Add Waves
+          <HelpTip text="Turn on a wave effect that bends the pattern" />
+        </span>
         <button
           onClick={() => setWave({ enabled: !wave.enabled })}
           className={cn(
@@ -33,7 +37,10 @@ export function ImageWaveControls() {
       {wave.enabled && (
         <>
           <div className="space-y-1.5">
-            <span className="text-xs text-secondary-foreground">Style</span>
+            <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+              Style
+              <HelpTip text="Choose the wave shape — smooth curves, sharp zigzags, or random noise" />
+            </span>
             <div className="flex gap-1.5">
               {WAVE_TYPES.map((wt) => (
                 <button
@@ -51,9 +58,9 @@ export function ImageWaveControls() {
               ))}
             </div>
           </div>
-          <SliderRow label="Intensity" value={wave.amplitude} onChange={(v) => setWave({ amplitude: v })} />
-          <SliderRow label="Density" value={wave.frequency} min={0.1} max={8} step={0.1} onChange={(v) => setWave({ frequency: v })} />
-          <SliderRow label="Shift" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
+          <SliderRow label="Intensity" tooltip="How strong the wave effect is" value={wave.amplitude} onChange={(v) => setWave({ amplitude: v })} />
+          <SliderRow label="Density" tooltip="How many waves fit across the image" value={wave.frequency} min={0.1} max={8} step={0.1} onChange={(v) => setWave({ frequency: v })} />
+          <SliderRow label="Shift" tooltip="Offset the wave — great for animating" value={wave.phaseOffset} onChange={(v) => setWave({ phaseOffset: v })} />
         </>
       )}
     </ControlSection>
