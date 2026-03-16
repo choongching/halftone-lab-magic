@@ -48,20 +48,6 @@ export function ImageColorControls() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <span className="text-xs text-secondary-foreground">Invert Colors</span>
-        <button
-          onClick={() => setConfig({ invertColors: !config.invertColors })}
-          className={cn(
-            "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-            config.invertColors
-              ? "bg-primary text-primary-foreground"
-              : "bg-secondary text-secondary-foreground"
-          )}
-        >
-          {config.invertColors ? "On" : "Off"}
-        </button>
-      </div>
       <div className="space-y-1.5">
         <span className="text-[10px] text-muted-foreground">Swatches</span>
         <div className="flex flex-wrap gap-1.5">
