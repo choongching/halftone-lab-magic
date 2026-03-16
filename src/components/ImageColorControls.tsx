@@ -20,7 +20,7 @@ export function ImageColorControls() {
     <ControlSection title="Colors">
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1">
-          <span className="text-[10px] text-muted-foreground">Foreground</span>
+          <span className="text-[10px] text-muted-foreground">Shape Color</span>
           <div className="flex items-center gap-2">
             <input
               type="color"
