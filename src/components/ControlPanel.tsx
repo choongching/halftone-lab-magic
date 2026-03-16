@@ -26,7 +26,7 @@ export function ControlPanel() {
               : "bg-secondary text-secondary-foreground"
           )}
         >
-          {config.advancedMode ? "Advanced" : "Basic"}
+          {config.advancedMode ? "Pro Mode" : "Simple"}
         </button>
       </div>
       <ScrollArea className="flex-1">
