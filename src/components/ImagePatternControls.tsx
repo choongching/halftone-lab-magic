@@ -29,7 +29,7 @@ export function ImagePatternControls() {
         displayValue={`${config.rows}`}
       />
       <SliderRow
-        label="Size Range"
+        label="Shape Size"
         value={config.sizeRange}
         onChange={(v) => setConfig({ sizeRange: v })}
       />
