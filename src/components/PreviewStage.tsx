@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { useHalftoneStore } from "@/store/halftoneStore";
 import { renderImageHalftone } from "@/engine/imageRenderer";
 import { useImageLuminance } from "@/hooks/useImageLuminance";
-import { Upload } from "lucide-react";
+import { Upload, ZoomIn, ZoomOut } from "lucide-react";
 
 export function PreviewStage() {
   const config = useHalftoneStore((s) => s.config);
