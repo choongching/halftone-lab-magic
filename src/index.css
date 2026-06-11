@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Fragment+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;600&family=Chakra+Petch:wght@500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -72,12 +72,16 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  .font-display {
-    font-family: 'Instrument Serif', Georgia, serif;
+  .font-geist {
+    font-family: 'Geist', system-ui, sans-serif;
   }
 
-  .font-fragment {
-    font-family: 'Fragment Mono', 'JetBrains Mono', monospace;
+  .font-geist-mono {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+  }
+
+  .font-chakra {
+    font-family: 'Chakra Petch', sans-serif;
   }
 }
 
