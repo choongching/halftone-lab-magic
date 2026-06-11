@@ -66,6 +66,13 @@ The preview itself supports zooming from 20% to 150%. Use the `+` and `-` keys, 
 
 A running log of how Halftone Lab has evolved, and what is in flight right now.
 
+### 2026-06-11
+
+- Restyled the landing page after the gamut.so design language: a full-viewport rounded card hero with left-aligned copy, a Chakra Petch display headline ("Drop a photo. Get halftone art."), Geist body text, and a navy pill button (#5).
+- Replaced the dithered mountain backdrop with an animated halftone swirl: a fixed grid of grayscale dots whose sizes follow slowly drifting noise, with a calm zone behind the copy and a static frame for reduced-motion users (#5).
+- Made the hero fully fluid: headline, body, button, logo, and spacing all scale together from phone to desktop with no breakpoint jumps (#5).
+- Refined the logo mark with smaller, clearly separated white dots, in both the page header and the favicon (#5).
+
 ### 2026-06-10
 
 - Added a landing page at the root route with a centered serif hero, a single launch button, and a full-bleed animated backdrop: five layers of dithered mountain ridgelines with slow parallax drift and grain twinkle, rendered on a canvas at a deliberately low frame rate and honoring reduced-motion preferences (#3). The studio itself now lives at /app.
