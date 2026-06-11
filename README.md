@@ -66,8 +66,10 @@ The preview itself supports zooming from 20% to 150%. Use the `+` and `-` keys, 
 
 A running log of how Halftone Lab has evolved, and what is in flight right now.
 
-### Unreleased
+### 2026-06-10
 
+- Added a landing page at the root route with a centered serif hero, a single launch button, and a full-bleed animated backdrop: five layers of dithered mountain ridgelines with slow parallax drift and grain twinkle, rendered on a canvas at a deliberately low frame rate and honoring reduced-motion preferences (#3). The studio itself now lives at /app.
+- Replaced the scaffold favicon with an on-brand halftone dot mark (SVG plus PNG fallback) and added Open Graph and Twitter share metadata.
 - Pinned the package manager with a `packageManager` field in `package.json` (pnpm 10.15.0) so every environment installs with pnpm.
 - Rewrote the README with this changelog and a cleaned-up project write-up.
 
