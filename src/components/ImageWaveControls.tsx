@@ -1,5 +1,5 @@
 import { useHalftoneStore } from "@/store/halftoneStore";
-import { ControlSection, SliderRow } from "./ControlSection";
+import { ControlSection, SliderRow, ToggleRow } from "./ControlSection";
 import { WAVE_TYPE_LABELS, type WaveType } from "@/types/halftone";
 import { cn } from "@/lib/utils";
 import { HelpTip } from "./HelpTip";
@@ -17,23 +17,12 @@ export function ImageWaveControls() {
 
   return (
     <ControlSection title="Waviness" tooltip="Add a wavy distortion effect to the pattern">
-      <div className="flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-          Add Waves
-          <HelpTip text="Turn on a wave effect that bends the pattern" />
-        </span>
-        <button
-          onClick={() => setWave({ enabled: !wave.enabled })}
-          className={cn(
-            "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-            wave.enabled
-              ? "bg-primary text-primary-foreground"
-              : "bg-secondary text-secondary-foreground"
-          )}
-        >
-          {wave.enabled ? "On" : "Off"}
-        </button>
-      </div>
+      <ToggleRow
+        label="Add Waves"
+        tooltip="Turn on a wave effect that bends the pattern"
+        checked={wave.enabled}
+        onChange={(v) => setWave({ enabled: v })}
+      />
       {wave.enabled && (
         <>
           <div className="space-y-1.5">

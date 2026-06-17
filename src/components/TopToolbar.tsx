@@ -1,8 +1,16 @@
+import { Link } from "react-router-dom";
 import { useHalftoneStore } from "@/store/halftoneStore";
 import { renderImageHalftone, imageElementsToSvgString } from "@/engine/imageRenderer";
 import { useImageLuminance } from "@/hooks/useImageLuminance";
 import { downloadSvg, downloadPng } from "@/utils/export";
-import { Shuffle, RotateCcw, Download, Image } from "lucide-react";
+import { LogoMark } from "@/pages/Landing";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Shuffle, RotateCcw, Download, Image, FileCode, ChevronDown } from "lucide-react";
 
 export function TopToolbar() {
   const { config, randomize, resetConfig } = useHalftoneStore();
@@ -25,39 +33,58 @@ export function TopToolbar() {
   const canExport = !!config.sourceImageUrl && !!lumaMap;
 
   return (
-    <div className="flex h-11 items-center justify-between border-b border-border bg-card px-4">
-      <div className="flex items-center gap-4">
-        <h1 className="text-sm font-bold tracking-tight text-foreground">Halftone Lab <span className="font-normal text-muted-foreground">by CC Teo</span></h1>
+    <header className="flex h-12 items-center justify-between border-b border-border bg-card px-4">
+      <div className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80" title="Back to landing">
+          <LogoMark className="h-6 w-6" />
+          <span className="font-chakra text-[15px] font-semibold tracking-tight text-foreground">
+            Halftone Lab
+          </span>
+        </Link>
+        <span className="hidden text-[11px] text-muted-foreground sm:inline">by CC Teo</span>
       </div>
+
       <div className="flex items-center gap-1.5">
+        <Link
+          to="/styleguide"
+          className="hidden rounded-md px-2.5 py-1 font-geist-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
+        >
+          Guide
+        </Link>
+        <div className="mx-1 hidden h-4 w-px bg-border md:block" />
         <button
           onClick={randomize}
-          className="flex items-center gap-1.5 rounded-md bg-secondary px-2.5 py-1 text-[11px] font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors"
+          className="flex items-center gap-1.5 rounded-md bg-secondary px-2.5 py-1.5 text-[11px] font-medium text-secondary-foreground transition-colors hover:bg-secondary/70"
         >
           <Shuffle className="h-3 w-3" /> Randomize
         </button>
         <button
           onClick={resetConfig}
-          className="flex items-center gap-1.5 rounded-md bg-secondary px-2.5 py-1 text-[11px] font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors"
+          className="flex items-center gap-1.5 rounded-md bg-secondary px-2.5 py-1.5 text-[11px] font-medium text-secondary-foreground transition-colors hover:bg-secondary/70"
         >
           <RotateCcw className="h-3 w-3" /> Reset
         </button>
         <div className="mx-1 h-4 w-px bg-border" />
-        <button
-          onClick={handleExportSvg}
-          disabled={!canExport}
-          className="flex items-center gap-1.5 rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40"
-        >
-          <Download className="h-3 w-3" /> SVG
-        </button>
-        <button
-          onClick={handleExportPng}
-          disabled={!canExport}
-          className="flex items-center gap-1.5 rounded-md bg-accent px-3 py-1 text-[11px] font-semibold text-accent-foreground hover:bg-accent/90 transition-colors disabled:opacity-40"
-        >
-          <Image className="h-3 w-3" /> PNG
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            disabled={!canExport}
+            className="flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none disabled:opacity-40 data-[state=open]:opacity-90"
+          >
+            <Download className="h-3 w-3" /> Export
+            <ChevronDown className="h-3 w-3 opacity-70" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="min-w-[9rem]">
+            <DropdownMenuItem onClick={handleExportSvg} className="gap-2 text-xs">
+              <FileCode className="h-3.5 w-3.5 text-primary" />
+              Download SVG
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleExportPng} className="gap-2 text-xs">
+              <Image className="h-3.5 w-3.5 text-primary" />
+              Download PNG
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-    </div>
+    </header>
   );
 }

@@ -219,14 +219,14 @@ const FIELD_SHADES = [
 ];
 
 const APP_COLORS = [
-  { name: "Background", value: "hsl(240 6% 10%)" },
-  { name: "Card", value: "hsl(240 5% 13%)" },
-  { name: "Foreground", value: "hsl(220 10% 86%)" },
-  { name: "Muted fg", value: "hsl(220 8% 52%)" },
-  { name: "Primary", value: "hsl(172 50% 55%)", note: "teal" },
-  { name: "Accent", value: "hsl(260 45% 60%)", note: "purple" },
-  { name: "Border", value: "hsl(240 4% 20%)" },
-  { name: "Destructive", value: "hsl(0 65% 55%)" },
+  { name: "Background", value: "hsl(22 55% 5%)", note: "espresso" },
+  { name: "Card", value: "hsl(20 52% 9%)", note: "panel" },
+  { name: "Foreground", value: "hsl(28 30% 90%)" },
+  { name: "Muted fg", value: "hsl(28 16% 60%)" },
+  { name: "Primary", value: "hsl(15 68% 50%)", note: "burnt orange" },
+  { name: "Accent", value: "hsl(30 52% 54%)", note: "ochre" },
+  { name: "Secondary", value: "hsl(20 38% 14%)", note: "chips" },
+  { name: "Border", value: "hsl(24 28% 17%)" },
 ];
 
 const HEADER_CALM = { x: 0.28, y: 0.52, radius: 0.55, strength: 0.78 };
@@ -281,7 +281,7 @@ function StyleguidePage({ theme }: { theme: Theme }) {
               style={{ color: theme.ink, textShadow: theme.bodyShadow }}
             >
               The visual language of Halftone Lab: an orange marketing layer
-              and a dark teal-and-purple workbench, both built from dots.
+              and a warm espresso-and-orange workbench, both built from dots.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
               <Link
@@ -325,8 +325,8 @@ function StyleguidePage({ theme }: { theme: Theme }) {
         <Section eyebrow="02 · Color" title="Palettes">
           <p className="max-w-xl text-[15px] leading-[1.55]">
             The landing and styleguide share the{" "}
-            <span style={{ color: theme.heading }}>{theme.name}</span> theme. The app workbench keeps its
-            own dark teal-and-purple palette.
+            <span style={{ color: theme.heading }}>{theme.name}</span> theme. The app workbench is the dark
+            sibling: the same orange accent over warm espresso surfaces.
           </p>
           <Eyebrow>Brand · {theme.name}</Eyebrow>
           <ul className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
@@ -362,28 +362,21 @@ function StyleguidePage({ theme }: { theme: Theme }) {
           />
           <TypeRow
             name="Geist"
-            usage="landing body + UI · weights 400/500/600"
+            usage="landing + app body & UI · weights 400/500/600"
             className="max-w-xl text-[17px] leading-[1.55]"
             style={{ color: theme.ink }}
             sample="Your photo becomes dots, squares, or triangles that trace its light and shadow."
           />
           <TypeRow
             name="Geist Mono"
-            usage="eyebrows + captions · 11px · uppercase · 0.1em tracking"
+            usage="eyebrows, captions + app section labels · 11px · uppercase · 0.1em tracking"
             className="font-geist-mono text-[11px] font-semibold uppercase tracking-[0.1em]"
             style={{ color: theme.gray }}
-            sample="In the box"
-          />
-          <TypeRow
-            name="Space Grotesk"
-            usage="app body (dark workbench)"
-            className="text-[17px] leading-[1.55]"
-            style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
-            sample="Grid spacing, wave amplitude, tone curve."
+            sample="Light & Shadow"
           />
           <TypeRow
             name="JetBrains Mono"
-            usage="app values + numerics"
+            usage="app slider values + numerics"
             className="font-mono text-[14px]"
             sample="spacing: 12 · size: 0.85 · rotation: 15°"
           />
@@ -439,7 +432,11 @@ function StyleguidePage({ theme }: { theme: Theme }) {
             </li>
             <li>
               <span className="font-medium" style={{ color: theme.heading }}>App radius token:</span>{" "}
-              <span className="font-geist-mono text-[13px]">--radius: 0.5rem</span> inside the dark workbench.
+              <span className="font-geist-mono text-[13px]">--radius: 0.625rem</span> inside the espresso workbench.
+            </li>
+            <li>
+              <span className="font-medium" style={{ color: theme.heading }}>Workbench controls:</span>{" "}
+              collapsible accordion sections, toggle switches for booleans, a segmented Simple/Pro mode control, and a single Export pill with an SVG/PNG menu.
             </li>
           </ul>
         </Section>

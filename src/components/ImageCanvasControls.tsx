@@ -1,5 +1,5 @@
 import { useHalftoneStore } from "@/store/halftoneStore";
-import { ControlSection, SliderRow } from "./ControlSection";
+import { ControlSection, SliderRow, ToggleRow } from "./ControlSection";
 import { type SizePreset } from "@/types/halftone";
 import { cn } from "@/lib/utils";
 import { HelpTip } from "./HelpTip";
@@ -92,40 +92,18 @@ export function ImageCanvasControls() {
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-              Show BG
-              <HelpTip text="Show or hide the background color behind the shapes" />
-            </span>
-            <button
-              onClick={() => setConfig({ showBackground: !config.showBackground })}
-              className={cn(
-                "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-                config.showBackground
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground"
-              )}
-            >
-              {config.showBackground ? "On" : "Off"}
-            </button>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-              See-Through BG
-              <HelpTip text="Export with a transparent background instead of a solid color" />
-            </span>
-            <button
-              onClick={() => setConfig({ transparentBackground: !config.transparentBackground })}
-              className={cn(
-                "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-                config.transparentBackground
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground"
-              )}
-            >
-              {config.transparentBackground ? "On" : "Off"}
-            </button>
-          </div>
+          <ToggleRow
+            label="Show BG"
+            tooltip="Show or hide the background color behind the shapes"
+            checked={config.showBackground}
+            onChange={(v) => setConfig({ showBackground: v })}
+          />
+          <ToggleRow
+            label="See-Through BG"
+            tooltip="Export with a transparent background instead of a solid color"
+            checked={config.transparentBackground}
+            onChange={(v) => setConfig({ transparentBackground: v })}
+          />
         </>
       )}
     </ControlSection>
