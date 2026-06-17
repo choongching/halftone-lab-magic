@@ -85,6 +85,49 @@
   }
 }
 
+/* Super-faint light-orange scanlines that drift slowly downward. */
+@keyframes halftone-scan {
+  to {
+    background-position: 0 6px;
+  }
+}
+
+.halftone-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(193, 67, 14, 0.06) 0,
+    rgba(193, 67, 14, 0.06) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  animation: halftone-scan 2.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halftone-scanlines {
+    animation: none;
+  }
+}
+
+/* Slowly drifting halftone text-mask — a living grain inside the letters.
+   The mask tile is 5px, so a 5px shift loops seamlessly. */
+@keyframes halftone-mask-drift {
+  to {
+    -webkit-mask-position: 5px 5px;
+    mask-position: 5px 5px;
+  }
+}
+
+.halftone-mask-anim {
+  animation: halftone-mask-drift 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halftone-mask-anim {
+    animation: none;
+  }
+}
+
 .halftone-slider {
   -webkit-appearance: none;
   appearance: none;
