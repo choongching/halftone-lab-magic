@@ -1,8 +1,9 @@
 import { useHalftoneStore } from "@/store/halftoneStore";
-import { ControlSection } from "./ControlSection";
-import { cn } from "@/lib/utils";
+import { ControlSection, ToggleRow } from "./ControlSection";
 
 const PALETTE_SWATCHES = [
+  { fg: "#fdf1e7", bg: "#231008" },
+  { fg: "#f15a22", bg: "#fdf1e7" },
   { fg: "#e8e4dc", bg: "#1a1a2e" },
   { fg: "#ffffff", bg: "#0a0a0a" },
   { fg: "#f5c542", bg: "#16213e" },
@@ -18,6 +19,12 @@ export function ImageColorControls() {
 
   return (
     <ControlSection title="Colors" tooltip="Pick colors for your shapes and background">
+      <ToggleRow
+        label="Flip Colors"
+        tooltip="Swap the shape and background colors"
+        checked={config.invertColors}
+        onChange={(v) => setConfig({ invertColors: v })}
+      />
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1">
           <span className="text-[10px] text-muted-foreground">Shape Color</span>

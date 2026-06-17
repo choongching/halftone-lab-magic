@@ -10,72 +10,57 @@ import { ImagePreviewControls } from "./ImagePreviewControls";
 import { ImageWaveControls } from "./ImageWaveControls";
 import { ControlSection } from "./ControlSection";
 import { cn } from "@/lib/utils";
-import { HelpTip } from "./HelpTip";
+
+const MODES = [
+  { value: false, label: "Simple", hint: "The essential controls" },
+  { value: true, label: "Pro", hint: "Reveal waves, border, and advanced options" },
+];
 
 export function ControlPanel() {
-  const { config, setConfig, toggleAdvancedMode } = useHalftoneStore();
+  const { config, setConfig } = useHalftoneStore();
 
   return (
-    <div className="flex h-full w-[300px] flex-col border-r border-border bg-card">
-      <div className="flex items-center justify-end border-b border-border px-4 py-2.5">
-        <button
-          onClick={toggleAdvancedMode}
-          className={cn(
-            "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-            config.advancedMode
-              ? "bg-primary text-primary-foreground"
-              : "bg-secondary text-secondary-foreground"
-          )}
+    <div className="flex h-full w-[304px] flex-col border-r border-border bg-card">
+      <div className="border-b border-border p-3">
+        <div
+          role="tablist"
+          aria-label="Control detail level"
+          className="grid grid-cols-2 gap-1 rounded-full bg-secondary/50 p-1"
         >
-          {config.advancedMode ? "Pro Mode" : "Simple"}
-        </button>
-      </div>
-      <ScrollArea className="flex-1">
-        <div className="space-y-5 p-4">
-          <ImageUpload />
-          <div className="h-px bg-border" />
-          <ControlSection title="Look & Feel" tooltip="General display settings for your artwork">
-            <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-                Flip Colors
-                <HelpTip text="Swap the shape and background colors" />
-              </span>
+          {MODES.map((m) => {
+            const active = config.advancedMode === m.value;
+            return (
               <button
-                onClick={() => setConfig({ invertColors: !config.invertColors })}
+                key={m.label}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setConfig({ advancedMode: m.value })}
+                title={m.hint}
                 className={cn(
-                  "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-                  config.invertColors
+                  "rounded-full py-1 text-[11px] font-semibold transition-colors",
+                  active
                     ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {config.invertColors ? "On" : "Off"}
+                {m.label}
               </button>
-            </div>
-          </ControlSection>
-          <div className="h-px bg-border" />
+            );
+          })}
+        </div>
+      </div>
+      <ScrollArea className="flex-1">
+        <div className="flex flex-col pb-4">
+          <ImageUpload />
           <ControlSection title="Shape Style" tooltip="Choose the shape type and adjust the pattern grid">
             <ImagePatternSelector />
             <ImagePatternControls />
           </ControlSection>
-          <div className="h-px bg-border" />
           <ToneMappingControls />
-          {config.advancedMode && (
-            <>
-              <div className="h-px bg-border" />
-              <ImageWaveControls />
-            </>
-          )}
-          <div className="h-px bg-border" />
+          {config.advancedMode && <ImageWaveControls />}
           <ImageCanvasControls />
-          <div className="h-px bg-border" />
           <ImageColorControls />
-          {config.advancedMode && (
-            <>
-              <div className="h-px bg-border" />
-              <ImagePreviewControls />
-            </>
-          )}
+          {config.advancedMode && <ImagePreviewControls />}
         </div>
       </ScrollArea>
     </div>

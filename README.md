@@ -66,6 +66,16 @@ The preview itself supports zooming from 20% to 150%. Use the `+` and `-` keys, 
 
 A running log of how Halftone Lab has evolved, and what is in flight right now.
 
+### 2026-06-17
+
+- Reskinned the editor at /app as a warm espresso-and-orange workbench, the dark sibling of the landing: a muted burnt-orange accent over roasted-brown surfaces, Geist UI with Chakra Petch headings and Geist Mono section labels, and the halftone logo mark in the toolbar (#8).
+- Reorganized the controls into collapsible accordion sections, replaced the On and Off pills with toggle switches (Flip Colors now defaults on), and added a segmented Simple and Pro mode switch so the two detail levels read clearly (#8).
+- Combined the separate SVG and PNG buttons into a single Export menu, gave every slider an orange progress fill, and rebuilt the empty preview state with the logo mark over a faint live halftone field (#8).
+- Rebuilt the animated background as a reusable HalftoneWave engine: a fractal-noise field rendered with dot, square, or triangle sprites, with optional cursor interaction (the field swells under the pointer) and a fleeting twinkle mode, all capped for performance and honoring reduced-motion (#7).
+- Added a bento landing variation at /bento: a six-box responsive grid (six columns on desktop, two on mobile) showcasing the dot, square, and triangle patterns in motion alongside the hero, a launch CTA, and live copy (#7).
+- Restyled the main landing in an orange-fill theme with a drifting halftone text mask over the headline and faint scanline motion behind it (#7).
+- Added a /styleguide reference page documenting the orange palette, type scale, and HalftoneWave field tokens (#7).
+
 ### 2026-06-11
 
 - Restyled the landing page after the gamut.so design language: a full-viewport rounded card hero with left-aligned copy, a Chakra Petch display headline ("Drop a photo. Get halftone art."), Geist body text, and a navy pill button (#5).

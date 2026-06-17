@@ -6,44 +6,46 @@
 
 @layer base {
   :root {
-    --background: 240 6% 10%;
-    --foreground: 220 10% 86%;
+    /* Warm espresso workbench: deep roasted browns with a single orange accent,
+       the dark sibling of the orange brand layer used on the landing pages. */
+    --background: 22 55% 5%;
+    --foreground: 28 30% 90%;
 
-    --card: 240 5% 13%;
-    --card-foreground: 220 10% 86%;
+    --card: 20 52% 9%;
+    --card-foreground: 28 30% 90%;
 
-    --popover: 240 5% 13%;
-    --popover-foreground: 220 10% 86%;
+    --popover: 20 52% 9%;
+    --popover-foreground: 28 30% 90%;
 
-    --primary: 172 50% 55%;
-    --primary-foreground: 240 6% 10%;
+    --primary: 15 68% 50%;
+    --primary-foreground: 28 55% 96%;
 
-    --secondary: 240 4% 18%;
-    --secondary-foreground: 220 10% 75%;
+    --secondary: 20 38% 14%;
+    --secondary-foreground: 28 30% 80%;
 
-    --muted: 240 4% 16%;
-    --muted-foreground: 220 8% 52%;
+    --muted: 20 34% 12%;
+    --muted-foreground: 28 14% 58%;
 
-    --accent: 260 45% 60%;
-    --accent-foreground: 220 10% 92%;
+    --accent: 30 52% 54%;
+    --accent-foreground: 22 55% 10%;
 
-    --destructive: 0 65% 55%;
-    --destructive-foreground: 220 10% 92%;
+    --destructive: 8 72% 55%;
+    --destructive-foreground: 28 40% 94%;
 
-    --border: 240 4% 20%;
-    --input: 240 4% 20%;
-    --ring: 172 50% 55%;
+    --border: 24 28% 17%;
+    --input: 24 28% 17%;
+    --ring: 15 68% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
-    --sidebar-background: 240 6% 10%;
-    --sidebar-foreground: 220 10% 86%;
-    --sidebar-primary: 172 50% 55%;
-    --sidebar-primary-foreground: 240 6% 10%;
-    --sidebar-accent: 240 4% 16%;
-    --sidebar-accent-foreground: 220 10% 86%;
-    --sidebar-border: 240 4% 20%;
-    --sidebar-ring: 172 50% 55%;
+    --sidebar-background: 22 55% 5%;
+    --sidebar-foreground: 28 30% 90%;
+    --sidebar-primary: 15 68% 50%;
+    --sidebar-primary-foreground: 28 55% 96%;
+    --sidebar-accent: 20 34% 12%;
+    --sidebar-accent-foreground: 28 30% 90%;
+    --sidebar-border: 24 28% 17%;
+    --sidebar-ring: 15 68% 50%;
   }
 }
 
@@ -54,7 +56,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Geist', system-ui, sans-serif;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -126,6 +128,18 @@
   .halftone-mask-anim {
     animation: none;
   }
+}
+
+/* Warm near-black canvas backdrop with a soft top vignette, so the artwork on
+   the stage reads true while still living in the espresso workbench. */
+.halftone-stage {
+  background-color: hsl(20 40% 4%);
+  background-image: radial-gradient(
+    120% 90% at 50% 0%,
+    hsl(22 45% 8%) 0%,
+    hsl(20 40% 4%) 60%,
+    hsl(20 45% 3%) 100%
+  );
 }
 
 .halftone-slider {

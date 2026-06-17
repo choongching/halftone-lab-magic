@@ -25,7 +25,7 @@ export const DEFAULT_CONFIG: ImageConfig = {
   backgroundColor: "#1a1a2e",
   transparentBackground: false,
   showBackground: true,
-  invertColors: false,
+  invertColors: true,
   showFrame: false,
   frameRadius: 12,
   sizePreset: "square",

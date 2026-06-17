@@ -2,7 +2,9 @@ import { useMemo, useState, useEffect, useCallback } from "react";
 import { useHalftoneStore } from "@/store/halftoneStore";
 import { renderImageHalftone } from "@/engine/imageRenderer";
 import { useImageLuminance } from "@/hooks/useImageLuminance";
-import { Upload, ZoomIn, ZoomOut } from "lucide-react";
+import { HalftoneWave } from "@/components/HalftoneWave";
+import { LogoMark } from "@/pages/Landing";
+import { ZoomIn, ZoomOut } from "lucide-react";
 
 const MIN_ZOOM = 20;
 const MAX_ZOOM = 150;
@@ -38,18 +40,33 @@ export function PreviewStage() {
 
   if (!config.sourceImageUrl) {
     return (
-      <div className="flex h-full w-full items-center justify-center overflow-auto p-8 bg-[hsl(240,6%,7%)]">
-        <div className="flex flex-col items-center gap-3 text-muted-foreground">
-          <Upload className="h-10 w-10 opacity-30" />
-          <p className="text-sm">Drop an image to get started</p>
-          <p className="text-xs opacity-50">Add a photo using the panel on the left</p>
+      <div className="halftone-stage relative flex h-full w-full items-center justify-center overflow-hidden p-8">
+        <HalftoneWave
+          className="absolute inset-0 h-full w-full"
+          colorA="#321405"
+          colorB="#9C3D14"
+          cellSize={11}
+          softness={0.5}
+          speed={1}
+          noiseScale={2.4}
+          opacity={0.38}
+        />
+        <div className="relative flex max-w-xs flex-col items-center gap-4 text-center">
+          <LogoMark className="h-12 w-12" />
+          <h2 className="font-chakra text-2xl font-semibold tracking-tight text-foreground">
+            Drop a photo.
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Upload an image in the panel on the left to generate a halftone from
+            its light and shadow.
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-auto p-4 bg-[hsl(240,6%,7%)]">
+    <div className="halftone-stage relative flex h-full w-full items-center justify-center overflow-auto p-4">
       <div
         className="relative shrink-0"
         style={{
@@ -75,12 +92,12 @@ export function PreviewStage() {
       </div>
 
       {/* Zoom controls */}
-      <div className="absolute bottom-4 right-4 flex items-center gap-1.5 rounded-lg border border-border/50 bg-background/80 backdrop-blur-sm px-2 py-1.5 text-xs text-muted-foreground">
-        <button onClick={zoomOut} className="p-0.5 hover:text-foreground transition-colors" title="Zoom out (-)">
+      <div className="absolute bottom-4 right-4 flex items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2 py-1.5 text-xs text-muted-foreground backdrop-blur-sm">
+        <button onClick={zoomOut} className="p-0.5 transition-colors hover:text-primary" title="Zoom out (-)">
           <ZoomOut className="h-3.5 w-3.5" />
         </button>
-        <span className="w-8 text-center tabular-nums">{zoom}%</span>
-        <button onClick={zoomIn} className="p-0.5 hover:text-foreground transition-colors" title="Zoom in (=)">
+        <span className="w-9 text-center font-mono tabular-nums">{zoom}%</span>
+        <button onClick={zoomIn} className="p-0.5 transition-colors hover:text-primary" title="Zoom in (=)">
           <ZoomIn className="h-3.5 w-3.5" />
         </button>
       </div>

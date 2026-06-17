@@ -1,7 +1,5 @@
 import { useHalftoneStore } from "@/store/halftoneStore";
-import { ControlSection, SliderRow } from "./ControlSection";
-import { cn } from "@/lib/utils";
-import { HelpTip } from "./HelpTip";
+import { ControlSection, SliderRow, ToggleRow } from "./ControlSection";
 
 export function ToneMappingControls() {
   const { config, setConfig } = useHalftoneStore();
@@ -35,23 +33,12 @@ export function ToneMappingControls() {
         step={0.01}
         onChange={(v) => setConfig({ threshold: v })}
       />
-      <div className="flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-          Flip Tones
-          <HelpTip text="Swap light and dark areas so shadows become highlights" />
-        </span>
-        <button
-          onClick={() => setConfig({ invert: !config.invert })}
-          className={cn(
-            "rounded-full px-3 py-0.5 text-[10px] font-medium transition-all",
-            config.invert
-              ? "bg-primary text-primary-foreground"
-              : "bg-secondary text-secondary-foreground"
-          )}
-        >
-          {config.invert ? "On" : "Off"}
-        </button>
-      </div>
+      <ToggleRow
+        label="Flip Tones"
+        tooltip="Swap light and dark areas so shadows become highlights"
+        checked={config.invert}
+        onChange={(v) => setConfig({ invert: v })}
+      />
       {config.advancedMode && (
         <SliderRow
           label="Midtones"
